@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KINNNHO1 - SITE OFICIAL</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        
+        .container {
+            text-align: center;
+            animation: fadeIn 1s ease-in;
+        }
+        
+        h1 {
+            font-size: 4em;
+            color: white;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            margin-bottom: 20px;
+            animation: bounce 1s infinite;
+        }
+        
+        .emoji {
+            font-size: 5em;
+            animation: spin 2s linear infinite;
+        }
+        
+        button {
+            padding: 20px 40px;
+            font-size: 1.5em;
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+        }
+        
+        button:hover {
+            background-color: #ff5252;
+            transform: scale(1.1);
+        }
+        
+        button:active {
+            transform: scale(0.95);
+        }
+        
+        .message {
+            display: none;
+            font-size: 2.5em;
+            color: #ffff00;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            margin-top: 30px;
+            animation: shake 0.5s;
+            font-weight: bold;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translate(0); }
+            25% { transform: translate(-10px); }
+            50% { transform: translate(10px); }
+            75% { transform: translate(-10px); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="emoji">🤡</div>
+        <h1>BEM-VINDO KINNNHO1!</h1>
+        <p style="color: white; font-size: 1.5em; margin: 20px 0;">Clica no botão aí!</p>
+        <button id="playSound">CLICA AQUI MEU REI!</button>
+        <div class="message" id="trollMessage">🚨 KKKKKKK VOCÊ CAIU! 🚨<br>TROLLADO DEMAIS!</div>
+    </div>
+
+    <script>
+        // Som ALTO ao entrar no site
+        window.addEventListener('load', function() {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.value = 800;
+            oscillator.type = 'sine';
+            
+            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.5);
+        });
+
+        // Mensagem trolada ao clicar
+        document.getElementById('playSound').addEventListener('click', function() {
+            const message = document.getElementById('trollMessage');
+            message.style.display = 'block';
+            
+            // Som engraçado ao clicar
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.setValueAtTime(500, audioContext.currentTime);
+            oscillator.frequency.setValueAtTime(800, audioContext.currentTime + 0.1);
+            oscillator.type = 'square';
+            
+            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.3);
+        });
+    </script>
+</body>
+</html>
